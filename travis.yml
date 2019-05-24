@@ -18,7 +18,13 @@ addons:
 
 cache:
   directories:
-  - .autoconf
-  - $HOME/.m2
+  - '$HOME/.m2/repository'
+  
   services:
   - docker
+  after_success:
+  - docker login  -u rajhans953 -p rajhans.yadav
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker build -t rajhans953/secq:latest . ;
+    docker push rajhans953/secq:latest;
+    fi
