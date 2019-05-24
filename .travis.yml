@@ -18,8 +18,8 @@ addons:
 
 cache:
   directories:
-  - '$HOME/.m2/repository'
-  
+  - .autoconf
+  - $HOME/.m2
   services:
   - docker
   after_success:
