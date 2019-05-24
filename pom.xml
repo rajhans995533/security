@@ -28,6 +28,7 @@
 			<version>5.1.2.RELEASE</version>
 		</dependency>
 
+
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
