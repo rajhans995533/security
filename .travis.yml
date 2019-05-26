@@ -1,7 +1,7 @@
 language: java
 
-before_install: 
-  - echo "MAVEN_OPTS='-Xmx2048M -Xss128M -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -XX:-UseGCOverheadLimit'" > ~/.mavenrc
+#before_install: 
+#  - echo "MAVEN_OPTS='-Xmx2048M -Xss128M -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -XX:-UseGCOverheadLimit'" > ~/.mavenrc
 
 install: skip
 script: travis_wait 60 mvn -q install -Pdefault-first,default-second -Dgib.enabled=true
@@ -15,16 +15,41 @@ addons:
   apt:
     packages:
       - oracle-java8-installer
-
-cache:
-  directories:
-  - .autoconf
-  - $HOME/.m2
-  services:
+      
+services:
   - docker
-  after_success:
-  - docker login  -u rajhans953 -p rajhans.yadav
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker build -t rajhans953/secq:latest . ;
-    docker push rajhans953/secq:latest;
-    fi
+
+before_install:
+  - docker build -t rajhans953/hans .
+  - docker run -d -p 127.0.0.1:80:4567 carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec foreman start;"
+  - docker ps -a
+  - docker run rajhans953/hans /bin/sh -c "cd /root/sinatra; bundle exec rake test"
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
+
+script:
+  - bundle exec rake test
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
+
+#cache:
+#  directories:
+#  - .autoconf
+#  - $HOME/.m2
+#  services:
+#  - docker
+#  after_success:
+#  - docker login  -u rajhans953 -p rajhans.yadav
+#  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+#    docker build -t rajhans953/secq:latest . ;
+#    docker push rajhans953/secq:latest;
+#    fi
+
