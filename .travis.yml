@@ -40,12 +40,12 @@ deploy:
 #  on:
 #    branch: master
 
-#cache:
-#  directories:
-#  - .autoconf
-#  - $HOME/.m2
-#  services:
-#  - docker
+cache:
+  directories:
+  - .autoconf
+  - $HOME/.m2
+  services:
+  - docker
   after_success:
   - docker login  -u rajhans953 -p rajhans.yadav
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
