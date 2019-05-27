@@ -12,12 +12,13 @@ addons:
 
 install:
   - docker build -t blog .
-  - docker run -d -p 127.0.0.1:80:80 --name blog blog
+  - docker tag rajhans
 
 script:
   - docker ps | grep -q blog
-  - docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push rajhans953/blog:latest
+  - docker login  -u rajhans953 -p rajhans.yadav
+  - docker tag rajhans953/blog:latest
+  - docker push
 #  - pwd
 #  - ls
 #  - ls  /home/travis/build/rajhans995533/security/
