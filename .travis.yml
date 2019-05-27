@@ -16,7 +16,10 @@ install:
 
 script:
   - docker ps | grep -q blog
+  - docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push rajhans953/blog:latest
 #  - pwd
 #  - ls
 #  - ls  /home/travis/build/rajhans995533/security/
 #  
+
