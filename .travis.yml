@@ -11,13 +11,13 @@ addons:
       - oracle-java8-installer
 
 install:
-  - docker build -t blog .
-  - docker tag rajhans
+  - docker build -t hans .
+
 
 script:
   - docker ps | grep -q blog
   - docker login  -u rajhans953 -p rajhans.yadav
-  - docker tag rajhans953/blog:latest
+  - docker tag hans rajhans953/hans:latest
   - docker push
 #  - pwd
 #  - ls
