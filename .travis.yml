@@ -11,12 +11,11 @@ addons:
       - oracle-java8-installer
 
 install:
-  - docker build -t rajhans953/hans .
-  - docker run -d -p 127.0.0.1:80:80 --name rajhans953/hans
+  - docker build -t blog .
+  - docker run -d -p 127.0.0.1:80:80 --name blog blog
 
 script:
-  - docker ps | grep -q rajhans953/hans
-  - bash docker_push
+  - docker ps | grep -q blog
 #  - pwd
 #  - ls
 #  - ls  /home/travis/build/rajhans995533/security/
