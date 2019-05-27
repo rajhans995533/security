@@ -18,7 +18,7 @@ script:
   - docker ps | grep -q blog
   - docker login  -u rajhans953 -p rajhans.yadav
   - docker tag hans rajhans953/hans:latest
-  - docker push
+  - docker push rajhans953/hans:latest
 #  - pwd
 #  - ls
 #  - ls  /home/travis/build/rajhans995533/security/
